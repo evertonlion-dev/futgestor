@@ -21,3 +21,24 @@ function renderPlayers() {
     list.appendChild(li);
   });
 }
+function renderPlayers() {
+  const list = document.getElementById("playerList");
+  list.innerHTML = "";
+
+  players.forEach((player, index) => {
+    const li = document.createElement("li");
+    li.textContent = player;
+
+    const btn = document.createElement("button");
+    btn.textContent = "❌";
+    btn.style.marginLeft = "10px";
+
+    btn.onclick = () => {
+      players.splice(index, 1);
+      renderPlayers();
+    };
+
+    li.appendChild(btn);
+    list.appendChild(li);
+  });
+}
