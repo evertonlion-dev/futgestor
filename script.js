@@ -1,4 +1,4 @@
-let players = [];
+let players = JSON.parse(localStorage.getItem("players")) || [];
 
 function addPlayer() {
   const input = document.getElementById("playerName");
@@ -8,19 +8,11 @@ function addPlayer() {
 
   players.push(name);
   input.value = "";
+
+  saveData();
   renderPlayers();
 }
 
-function renderPlayers() {
-  const list = document.getElementById("playerList");
-  list.innerHTML = "";
-
-  players.forEach(player => {
-    const li = document.createElement("li");
-    li.textContent = player;
-    list.appendChild(li);
-  });
-}
 function renderPlayers() {
   const list = document.getElementById("playerList");
   list.innerHTML = "";
@@ -31,10 +23,9 @@ function renderPlayers() {
 
     const btn = document.createElement("button");
     btn.textContent = "❌";
-    btn.style.marginLeft = "10px";
-
     btn.onclick = () => {
       players.splice(index, 1);
+      saveData();
       renderPlayers();
     };
 
@@ -42,3 +33,9 @@ function renderPlayers() {
     list.appendChild(li);
   });
 }
+
+function saveData() {
+  localStorage.setItem("players", JSON.stringify(players));
+}
+
+renderPlayers();
