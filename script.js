@@ -39,3 +39,4 @@ function saveData() {
 }
 
 renderPlayers();
+alert("Adicionado com sucesso ✅");
